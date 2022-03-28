@@ -2112,21 +2112,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Home',
+  props: {
+    scoreA: Number,
+    scoreB: Number
+  },
   data: function data() {
     return {
-      playerAscore: 0,
-      playerBscore: 0
+      formData: {
+        scoreA: 0,
+        scoreB: 0
+      },
+      scoreRules: [function (v) {
+        return v && v.length > 0 || 'Roles is required';
+      }, function (v) {
+        return v && v < 4 || 'Allowed score 1,2 and 3';
+      }]
     };
   },
   methods: {
     submit: function submit() {
-      if (this.$refs.form.validate()) {
-        this.$inertia.post('/user/create', this.formData);
-      }
+      console.log('step 1a'); //TODO validate 
+
+      this.$inertia.post('/', this.formData);
     }
   }
 });
@@ -7532,49 +7541,77 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "center" }, [
-    _c("h1", [_vm._v("Welcome")]),
+    _c("h1", [_vm._v("Tennis App")]),
     _vm._v(" "),
-    _c("form", { attrs: { action: "", method: "POST" } }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6" }, [
-          _c("p", [_vm._v("Player A")]),
-          _vm._v(" "),
-          _c("h1", [_vm._v(_vm._s(_vm.playerAscore))]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "text",
-            attrs: { type: "text", name: "scoreA" },
-          }),
-        ]),
+    _c("div", { staticClass: "row mt-4" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("p", [_vm._v("Player A")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6" }, [
-          _c("p", [_vm._v("Player B")]),
-          _vm._v(" "),
-          _c("h1", [_vm._v(_vm._s(_vm.playerBscore))]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "text",
-            attrs: { type: "text", name: "scoreB" },
-          }),
-        ]),
+        _c("h1", [_vm._v(_vm._s(_vm.scoreA))]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.scoreA,
+              expression: "formData.scoreA",
+            },
+          ],
+          staticClass: "text",
+          attrs: { type: "text", name: "scoreA", rules: _vm.scoreRules },
+          domProps: { value: _vm.formData.scoreA },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "scoreA", $event.target.value)
+            },
+          },
+        }),
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "col-6" }, [
+        _c("p", [_vm._v("Player B")]),
+        _vm._v(" "),
+        _c("h1", [_vm._v(_vm._s(_vm.scoreB))]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.scoreB,
+              expression: "formData.scoreB",
+            },
+          ],
+          staticClass: "text",
+          attrs: { type: "text", name: "scoreB", rules: _vm.scoreRules },
+          domProps: { value: _vm.formData.scoreB },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "scoreB", $event.target.value)
+            },
+          },
+        }),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mt-4" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("input", {
+          attrs: { type: "submit", value: "submit" },
+          on: { click: _vm.submit },
+        }),
+      ]),
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-4" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("input", { attrs: { type: "submit", value: "submit" } }),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

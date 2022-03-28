@@ -15,3 +15,4 @@ use App\Http\Controllers\GameController;
 */
 
 Route::get('/', [GameController::class, 'home' ]);
+Route::post('/', [GameController::class, 'score' ]);
