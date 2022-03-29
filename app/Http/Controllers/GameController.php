@@ -9,6 +9,12 @@ use Inertia\Inertia;
 
 class GameController extends Controller
 {
+    public const ADVANTAGE = 'Advantage';
+    public const DEUCE = 'Deuce';
+    public const THIRTY = 'Thirty All';
+    public const FIFTEEN = 'Fifteen All';
+    public const LOVE = 'Love All';
+
     public function home () {
         $score = $this->getScore();
         $buildScore = $this->buildScore($score->score_a, $score->score_b);
@@ -62,18 +68,18 @@ class GameController extends Controller
         if ($scoreA >= 3 && $scoreB >= 3) {
             if ($scoreA > $scoreB) {
                 $arr = [
-                    'scoreA' => $scoreA.' Advantage',
+                    'scoreA' => $scoreA.' '.self::ADVANTAGE,
                     'scoreB' => $scoreB,
                 ]; 
             } else if ($scoreB > $scoreA) {
                 $arr = [
                     'scoreA' => $scoreA,
-                    'scoreB' => $scoreB.' Advantage',
+                    'scoreB' => $scoreB.' '.self::ADVANTAGE,
                 ]; 
             } else if ($scoreA == $scoreB) {
                 $arr = [
-                    'scoreA' => $scoreA.' Deuce',
-                    'scoreB' => $scoreB.' Deuce',
+                    'scoreA' => $scoreA.' '.self::DEUCE,
+                    'scoreB' => $scoreB.' '.self::DEUCE,
                 ]; 
             }
             
@@ -81,9 +87,9 @@ class GameController extends Controller
         }
 
         if ($scoreA == $scoreB) {
-            $str = ($scoreA < 3) ? 'Thirty All' : $str;
-            $str = ($scoreA < 2) ? 'Fifteen All' : $str;
-            $str = ($scoreA < 1) ? 'Love All' : $str;
+            $str = ($scoreA < 3) ? self::THIRTY : $str;
+            $str = ($scoreA < 2) ? self::FIFTEEN : $str;
+            $str = ($scoreA < 1) ? self::LOVE : $str;
         }
 
         $arr = [
