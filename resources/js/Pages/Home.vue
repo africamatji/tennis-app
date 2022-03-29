@@ -11,13 +11,13 @@
             <div class="col-6">
                 <p>Player A</p>
                 <h1>{{ scoreA }}</h1>
-                <input type="text" v-validate="'required'" name="scoreA" v-model="formData.scoreA" class="text" />
+                <input type="text" v-validate="'required|min_value:0'" name="scoreA" v-model="formData.scoreA" class="text" />
                 <span>{{ errors.first('scoreA') }}</span>
             </div>
             <div class="col-6">
                 <p>Player B</p>
                 <h1>{{ scoreB }}</h1>
-                <input type="text" v-validate="'required'" name="scoreB" v-model="formData.scoreB" class="text" />
+                <input type="text" v-validate="'required|min_value:0'" name="scoreB" v-model="formData.scoreB" class="text" />
                 <span>{{ errors.first('scoreB') }}</span>
             </div>
         </div>
