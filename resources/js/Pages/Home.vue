@@ -3,7 +3,7 @@
     <h1>Tennis App</h1>
     <div v-if="winner != ''">
       <h3 class="blue">WINNER : <strong>{{ winner }}</strong> </h3>
-      <input type="submit" value="Start New Match ?" @click="resetGame" />
+      <input type="submit" value="Start New Match ?" @click="resetScore" />
     </div>
     
       <form @submit.prevent="onSubmit">
@@ -55,8 +55,9 @@
         }
         });
       },
-      resetGame () {
-        console.log('new game..');
+      resetScore () {
+        this.$inertia.get('/reset');
+        window.location.reload();
       },
     },
   }

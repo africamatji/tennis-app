@@ -28,7 +28,7 @@ class GameController extends Controller
         $winner = $this->findWinner( $score->score_a,  $score->score_b);
         $buildScore = $this->buildScore($score->score_a, $score->score_b);
         $buildScore['winner'] = $winner;
-        
+
         return Inertia::render('Home', $buildScore);
     }
 
@@ -92,7 +92,12 @@ class GameController extends Controller
         ];
 
         return $arr;
+    }
 
-
+    public function resetScore () {
+        Score::where('id',1)->update([
+            'score_a'=> 0,
+            'score_b'=> 0,
+        ]);
     }
 }
