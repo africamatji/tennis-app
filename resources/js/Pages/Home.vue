@@ -1,18 +1,23 @@
 <template>
   <div class="center">
     <h1>Tennis App</h1>
+    <div v-if="winner != ''">
+      <h3 class="blue">WINNER : <strong>{{ winner }}</strong> </h3>
+      <input type="submit" value="Start New Match ?" @click="resetGame" />
+    </div>
+    
       <form @submit.prevent="onSubmit">
         <div class="row mt-4">
             <div class="col-6">
                 <p>Player A</p>
                 <h1>{{ scoreA }}</h1>
-                <input type="text" v-validate="'required|max_value:3'" name="scoreA" v-model="formData.scoreA" class="text" />
+                <input type="text" v-validate="'required'" name="scoreA" v-model="formData.scoreA" class="text" />
                 <span>{{ errors.first('scoreA') }}</span>
             </div>
             <div class="col-6">
                 <p>Player B</p>
                 <h1>{{ scoreB }}</h1>
-                <input type="text" v-validate="'required|max_value:3'" name="scoreB" v-model="formData.scoreB" class="text" />
+                <input type="text" v-validate="'required'" name="scoreB" v-model="formData.scoreB" class="text" />
                 <span>{{ errors.first('scoreB') }}</span>
             </div>
         </div>
@@ -29,8 +34,9 @@
   export default {
     name: 'Home',
     props: {
-      scoreA: Number,
-      scoreB: Number,
+      scoreA: [String, Number],
+      scoreB: [String, Number],
+      winner: String,
     },
     data () {
       return {
@@ -49,6 +55,9 @@
         }
         });
       },
+      resetGame () {
+        console.log('new game..');
+      },
     },
   }
 </script>
@@ -61,5 +70,8 @@
   }
   .text {
     width: 100%;
+  }
+  .blue {
+    color:blue !important;
   }
 </style>
