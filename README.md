@@ -15,6 +15,9 @@ composer install
 ```bash
 npm install
 ```
+```bash
+npm run dev
+```
 ## Environment setup
 ```bash
 cp .env.example .env
