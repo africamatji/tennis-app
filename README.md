@@ -36,6 +36,13 @@ php artisan migrate
 php artisan db:seed --class=ScoreSeeder
 ```
 
+## Generate Encryption Key
+
+```bash
+php artisan key:generate
+```
+
+
 ## Run application
 
 ```bash
