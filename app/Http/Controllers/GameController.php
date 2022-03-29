@@ -14,6 +14,8 @@ class GameController extends Controller
     public const THIRTY = 'Thirty All';
     public const FIFTEEN = 'Fifteen All';
     public const LOVE = 'Love All';
+    public const PLAYER_A = 'Player A';
+    public const PLAYER_B = 'Player B';
 
     public function home () {
         $score = $this->getScore();
@@ -54,9 +56,9 @@ class GameController extends Controller
     public function findWinner ($scoreA, $scoreB) {
         $str = '';
         if ($scoreA >= 4 && ($scoreA - $scoreB >= 2)) {
-            $str = 'Player A';
+            $str = self::PLAYER_A;
         } else if ($scoreB >= 4 && ($scoreB - $scoreA >= 2)) {
-            $str = 'Player B';
+            $str = self::PLAYER_B;
         }
         
         return $str;
